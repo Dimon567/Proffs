@@ -43,8 +43,7 @@ public class SettingsManager : MonoBehaviour
 [Serializable]
 public class GameSettings
 {
-    public int screenWidth = 1920;
-    public int screenHeight = 1080;
+    public string screenSize = "1920:1080";
     public bool windowsMode = false;
     public bool musicEnabled = true;
     public string language = "English";
