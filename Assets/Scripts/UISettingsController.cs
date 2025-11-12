@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UISettingsController : MonoBehaviour
@@ -15,6 +16,10 @@ public class UISettingsController : MonoBehaviour
     public Toggle windowToggle;
     public Button saveButton;
     public Button rollbackSettingsButton;
+    public Button exitButton;
+    public TMP_Text timerText;
+
+    private Coroutine timerCoroutine;
 
     private Dictionary<string, Vector2Int> resolutions = new Dictionary<string, Vector2Int>{
         {"1280:720", new Vector2Int(1280, 720)},
@@ -44,7 +49,25 @@ public class UISettingsController : MonoBehaviour
         windowToggle.onValueChanged.AddListener(OnWindowsModeChanged);
         saveButton.onClick.AddListener(SaveSettings);
         rollbackSettingsButton.onClick.AddListener(RollBackSettings);
+        exitButton.onClick.AddListener(OnExitSettings);
 
+    }
+
+    void OnExitSettings()
+    {
+        timerCoroutine = StartCoroutine(TimerRollback());
+    }
+
+    public IEnumerator TimerRollback()
+    {
+        for (int i = 10; i > 0; i--)
+        {
+            timerText.text = i.ToString();
+            yield return new WaitForSeconds(1);
+        }
+        rollbackSettingsButton.onClick.Invoke();
+        RollBackSettings();
+        
     }
 
     void UpdateUI()
@@ -63,6 +86,7 @@ public class UISettingsController : MonoBehaviour
     void SaveSettings()
     {
         SettingsManager.instance.SaveSettings();
+        StopCoroutine(timerCoroutine);
     }
 
     void RollBackSettings()
