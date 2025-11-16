@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -52,10 +54,13 @@ public class InventaryManager : MonoBehaviour
         string json = JsonUtility.ToJson(inventory, true);
         File.WriteAllText(path, json);
     }
+
 }
 
 [Serializable]
 public class Inventory
 {
     public int countCoins = 0;
+    public List<int> boughtBackgrounds = new List<int>(){ 1 };
+    public int selectBackground = 1;
 }
