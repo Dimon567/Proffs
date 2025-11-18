@@ -55,6 +55,18 @@ public class InventaryManager : MonoBehaviour
         File.WriteAllText(path, json);
     }
 
+    public bool WasBackgroundbought(int idBackground)
+    {
+        foreach (int id in inventory.boughtBackgrounds)
+        {
+            if (idBackground == id)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }
 
 [Serializable]
@@ -62,5 +74,5 @@ public class Inventory
 {
     public int countCoins = 0;
     public List<int> boughtBackgrounds = new List<int>(){ 1 };
-    public int selectBackground = 1;
+    public int currentBackground = 1;
 }

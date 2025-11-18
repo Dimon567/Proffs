@@ -7,13 +7,22 @@ public class UIItemShopBackgroundsController : MonoBehaviour
 {
     public GameObject blockSalary;
     public TextMeshProUGUI textSalary;
-    Image backgroundImage;
+    public Toggle toggeleSelecter;
+    public Button buyButton;
+    public GameObject toggelGroup;
+    [SerializeField] int id;
+    [SerializeField] int salary;
     InventaryManager invManager;
 
     void Start()
     {
-        textSalary.text = "";
+        textSalary.text = salary.ToString();
         invManager = InventaryManager.instance;
+        buyButton.onClick.AddListener(BuyBackground);
+        toggeleSelecter.onValueChanged.AddListener(OnSelected);
+
+        UpdateUIBought();
+        UpdateUISelectCurrent();
     }
     void Update()
     {
@@ -29,17 +38,51 @@ public class UIItemShopBackgroundsController : MonoBehaviour
             textSalary.color = Color.white;
         }
     }
-    public void UpdateUIBought()
+    void UpdateUIBought()
     {
-        
-        blockSalary.SetActive(false);
+        if (invManager.WasBackgroundbought(id))
+        {
+            blockSalary.SetActive(false);
+            buyButton.gameObject.SetActive(false);
+            toggeleSelecter.gameObject.SetActive(true);
+            toggeleSelecter.group = toggelGroup.gameObject.GetComponent<ToggleGroup>();
+        }
+        else
+        {
+            blockSalary.SetActive(true);
+            buyButton.gameObject.SetActive(true);
+            toggeleSelecter.gameObject.SetActive(false);
+            toggeleSelecter.group = null;
+        }
     }
-    //public void BuyBackground()
-    //{
-    //    if (invManager.SubCoins(0))
-    //    {
-    //        invManager.inventory.backgrounds.Add(0);
-    //    }
-    //}
+    void BuyBackground()
+    {
+        if (!invManager.SubCoins(salary))
+        {
+            return;
+        }
+
+        invManager.inventory.boughtBackgrounds.Add(id);
+        invManager.inventory.currentBackground = id;
+        toggeleSelecter.Select();
+        invManager.SaveInventory();
+        UpdateUIBought();
+
+    }
+    void OnSelected(bool value)
+    {
+        if (value)
+        {
+            invManager.inventory.currentBackground = id;
+            invManager.SaveInventory();
+        }   
+    }
+    void UpdateUISelectCurrent()
+    {
+        if (invManager.inventory.currentBackground == id)
+        {
+            toggeleSelecter.isOn = true;
+        }
+    }
 
 }
