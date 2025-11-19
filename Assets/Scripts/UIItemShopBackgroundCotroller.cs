@@ -30,7 +30,7 @@ public class UIItemShopBackgroundsController : MonoBehaviour
     }
     void UpdateUISalary()
     {
-        if (invManager.inventory.countCoins < 0)
+        if (invManager.inventory.countCoins < salary)
         {
             textSalary.color = Color.red;
         }
