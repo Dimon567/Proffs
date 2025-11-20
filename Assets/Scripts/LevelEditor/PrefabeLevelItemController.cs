@@ -1,14 +1,14 @@
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 
 public class PrefabeLevelItemController : MonoBehaviour
 {
     Transform transform;
-
-    RaycastHit hit;
-    bool isHit = false;
+    public bool isMove = true;
+    
 
     private void Start()
     {
@@ -16,28 +16,34 @@ public class PrefabeLevelItemController : MonoBehaviour
     }
     void FixedUpdate()
     {
-        transform.position.Lerp(transform.position, MoveToMouse(), Time.deltaTime);
+        if (isMove)
+        {
+            transform.position = Vector3.Lerp(transform.position, MovePositionToMouse(), Time.deltaTime * 10);
+        }
+        //Debug.Log(transform.position);
+    }
+    private Vector3 MovePositionToMouse()
+    {
+        float distance = GetComponent<Transform>().parent.transform.position.z - Camera.main.transform.position.z;
+
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance));
+        RaycastHit hit;
+        Ray ray = new Ray(mousePosition, transform.forward);
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            Debug.DrawRay(ray.origin, ray.direction, Color.red, hit.distance);
+            return new Vector3(hit.point.x, hit.point.y, transform.parent.position.z);
+        }
+
+        Debug.DrawRay(ray.origin, ray.direction, Color.red, hit.distance);
+
+        return transform.position;
     }
 
-    private Vector3 MoveToMouse()
+    public void DestroyItem()
     {
-        Vector3 mousePosition = Mouse.current.position.ReadValue();
-        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-
-        isHit = Physics.Raycast(ray, out hit);
-
-        //if (!isHit)
-        //{
-        //    return transform.position;
-        //}
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * hit.distance, Color.red);
-        Debug.Log("Raycast hit: " + hit.collider.name);
-
-        //transform.position = mousePosition;
-
-        return new Vector3(transform.localPosition.x, transform.localPosition.y, 0);
-
-
+        gameObject.SetActive(false);
     }
 
 }

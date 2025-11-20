@@ -3,10 +3,12 @@ using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using UnityEngine.Rendering;
 
 public class LevelManager : MonoBehaviour
 {
     public LevelManager instanse;
+    public List<StepEdit> editSteps;
 
     void Start()
     {
@@ -18,4 +20,19 @@ public class LevelManager : MonoBehaviour
 
     }
 
+}
+
+[Serializable]
+public class StepEdit
+{
+    enum typeChanges
+    {
+        Put = 1,
+        Rotate = 2,
+        Delete = 3
+    }
+
+    public int itemId;
+    public int stepId;
+    public Transform stepTransform;
 }

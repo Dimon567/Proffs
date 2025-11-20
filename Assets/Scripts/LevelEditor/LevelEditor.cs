@@ -1,49 +1,69 @@
-using TMPro.Examples;
+using System;
+using UnityEngine.UI;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEditor.Searcher;
+
 
 public class LevelEditor : MonoBehaviour
 {
     public GameObject levelGroup;
     private LevelItems levelPrefabs;
     private GameObject currentItemPrefab;
+    public event Action<int> OnSelected;
+    public Button roundButton;
+    public Button deleteButton;
+    private bool isState = false;
+
 
     private void Start()
     {
-        levelPrefabs = gameObject.GetComponent<LevelItems>();
-        UIItemController.OnSelected += SelectCurrentItem;
+        levelPrefabs = GetComponent<LevelItems>();
+        UIItemController.OnSelected += SpawnItem;
+        roundButton.onClick.AddListener(RotateItem);
+        deleteButton.onClick.AddListener(DeleteItem);
     }
 
-    private void SelectCurrentItem(int index)
+    private void SpawnItem(int index)
     {
-        currentItemPrefab = levelPrefabs.prefabs[index];
-        SpawnPrefab();
+        if(isState || currentItemPrefab == null)
+        {
+            GameObject prefab = levelPrefabs.prefabs[index];
+            GameObject item = Instantiate(prefab, levelGroup.transform);
+            item.AddComponent<PrefabeLevelItemController>();
+            currentItemPrefab = item;
+            isState = false;
+        }
     }
 
-    private void FixedUpdate()
+    private void OnRightClick()
     {
-        MovePrefab();
+        PutItem();
     }
 
-    void MovePrefab()
+    void PutItem()
     {
-        if (currentItemPrefab == null)
+        currentItemPrefab.GetComponent<PrefabeLevelItemController>().isMove = false;
+        isState = true;
+    }
+
+    private void RotateItem()
+    {
+        if(!isState)
         {
             return;
         }
 
-        Vector2 mousePosition = Mouse.current.position.ReadValue();
-        Vector3 position = new Vector3(0,0,0);
-        currentItemPrefab.transform.position = position;
-        Debug.Log(currentItemPrefab.transform.position.ToString());
+        currentItemPrefab.transform.Rotate(0,0,90);
     }
 
-    private void SpawnPrefab()
+    private void DeleteItem()
     {
-        GameObject item = Instantiate(currentItemPrefab, levelGroup.transform);
-        item.AddComponent<PrefabeLevelItemController>();
-        
+        if(!isState)
+        {
+            return;
+        }
+
+        currentItemPrefab.GetComponent<PrefabeLevelItemController>().DestroyItem();
+        currentItemPrefab = null;
     }
-    
-    
 }
