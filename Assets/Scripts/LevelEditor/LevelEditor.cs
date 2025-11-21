@@ -7,12 +7,15 @@ using UnityEditor.Searcher;
 public class LevelEditor : MonoBehaviour
 {
     public GameObject levelGroup;
-    private LevelItems levelPrefabs;
-    private GameObject currentItemPrefab;
-    public event Action<int> OnSelected;
     public Button roundButton;
     public Button deleteButton;
+
+    private LevelItems levelPrefabs;
+    private GameObject currentItemPrefab;
     private bool isState = false;
+    public Level currentLevel;
+
+    public event Action<int> OnSelected;
 
 
     private void Start()
@@ -21,6 +24,7 @@ public class LevelEditor : MonoBehaviour
         UIItemController.OnSelected += SpawnItem;
         roundButton.onClick.AddListener(RotateItem);
         deleteButton.onClick.AddListener(DeleteItem);
+        currentLevel = new Level();
     }
 
     private void SpawnItem(int index)
