@@ -13,10 +13,9 @@ public class LevelEditor : MonoBehaviour
     private LevelItems levelPrefabs;
     private GameObject currentItemPrefab;
     private bool isState = false;
-    public Level currentLevel;
+    private Level currentLevel;
 
     public event Action<int> OnSelected;
-
 
     private void Start()
     {
@@ -25,6 +24,7 @@ public class LevelEditor : MonoBehaviour
         roundButton.onClick.AddListener(RotateItem);
         deleteButton.onClick.AddListener(DeleteItem);
         currentLevel = new Level();
+        LevelManager.instanse.levelsList.levels.Add(currentLevel);
     }
 
     private void SpawnItem(int index)
@@ -33,7 +33,9 @@ public class LevelEditor : MonoBehaviour
         {
             GameObject prefab = levelPrefabs.prefabs[index];
             GameObject item = Instantiate(prefab, levelGroup.transform);
-            item.AddComponent<PrefabeLevelItemController>();
+            PrefabeLevelItemController prefabController = item.AddComponent<PrefabeLevelItemController>();
+
+            prefabController.prefabId = index;
             currentItemPrefab = item;
             isState = false;
         }
@@ -48,6 +50,7 @@ public class LevelEditor : MonoBehaviour
     {
         currentItemPrefab.GetComponent<PrefabeLevelItemController>().isMove = false;
         isState = true;
+        currentLevel.AddItem(currentItemPrefab);
     }
 
     private void RotateItem()

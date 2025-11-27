@@ -8,6 +8,7 @@ public class PrefabeLevelItemController : MonoBehaviour
 {
     Transform transform;
     public bool isMove = true;
+    public int prefabId;
     
 
     private void Start()

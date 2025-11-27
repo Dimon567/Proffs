@@ -1,16 +1,18 @@
+using JetBrains.Annotations;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
-using System.Collections.Generic;
-using System;
 using UnityEngine.Rendering;
-using JetBrains.Annotations;
-using System.IO;
+using static UnityEditor.Progress;
 
 public class LevelManager : MonoBehaviour
 {
-    public LevelManager instanse;
+    public static LevelManager instanse;
     public List<StepEdit> editSteps;
+    public Levels levelsList;
     string path;
 
     void Awake()
@@ -25,7 +27,7 @@ public class LevelManager : MonoBehaviour
         if (File.Exists(path))
         {
             string json = File.ReadAllText(path);
-            JsonUtility.FromJson<Levels>(json);
+            levelsList = JsonUtility.FromJson<Levels>(json);
         }
     }
 
@@ -34,24 +36,22 @@ public class LevelManager : MonoBehaviour
         string json = JsonUtility.ToJson(path, true);
         File.WriteAllText(path, json);
     }
-
-    public void AddItem(GameObject item)
-    {
-        Transform transform = item.transform;
-        ItemTransform itemTransform = new ItemTransform();
-
-        itemTransform.position = transform.position;
-        //itemTransform.rotation = transform.transform.rotation.z;
-
-    }
+    
 }
 
 [Serializable]
 public class ItemTransform
 {
     public Vector3 position;
-    public int rotation;
+    public Vector3 rotation;
     public int id;
+
+    public ItemTransform (GameObject item)
+    {
+        position = item.transform.position;
+        rotation = item.transform.eulerAngles;
+        id = item.GetComponent<PrefabeLevelItemController>().prefabId;
+    }
 }
 
 [Serializable]
@@ -74,6 +74,12 @@ public class Level
 {
     public int levelNum;
     public List<ItemTransform> items = new List<ItemTransform>();
+
+    public void AddItem(GameObject item)
+    {
+        ItemTransform itemTransform = new ItemTransform(item);
+        items.Add(itemTransform);
+    }
 }
 
 public class Levels
