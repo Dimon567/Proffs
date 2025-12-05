@@ -17,7 +17,7 @@ public class UICoinsCounterController : MonoBehaviour
 
     public void UpdateCounter()
     {
-        float count = InventaryManager.instance.inventory.countCoins;   
+        float count = InventaryManager.instance.inventory.countCoins;
         string str = count.ToString();
 
         if (count >= 1000)

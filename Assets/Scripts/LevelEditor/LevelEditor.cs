@@ -2,6 +2,7 @@ using System;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEditor.Searcher;
+using TMPro.Examples;
 
 
 public class LevelEditor : MonoBehaviour
@@ -23,8 +24,6 @@ public class LevelEditor : MonoBehaviour
         UIItemController.OnSelected += SpawnItem;
         roundButton.onClick.AddListener(RotateItem);
         deleteButton.onClick.AddListener(DeleteItem);
-        currentLevel = new Level();
-        LevelManager.instanse.levelsList.levels.Add(currentLevel);
     }
 
     private void SpawnItem(int index)
@@ -48,29 +47,66 @@ public class LevelEditor : MonoBehaviour
 
     void PutItem()
     {
-        currentItemPrefab.GetComponent<PrefabeLevelItemController>().isMove = false;
+        currentItemPrefab.GetComponent<PrefabeLevelItemController>().enabled = false;
         isState = true;
-        currentLevel.AddItem(currentItemPrefab);
     }
 
     private void RotateItem()
     {
-        if(!isState)
+        if (isState)
         {
-            return;
+            currentItemPrefab.transform.Rotate(0, 0, 90);
         }
-
-        currentItemPrefab.transform.Rotate(0,0,90);
     }
 
     private void DeleteItem()
     {
-        if(!isState)
+        if (isState)
         {
-            return;
+            Destroy(currentItemPrefab);
+            currentItemPrefab = null;
+        }
+    }
+
+    public void SaveLevel()
+    {
+        currentLevel = new Level();
+        if ()
+        {
+            LevelManager.instanse.levelsList.levels.Add(currentLevel);
+        }
+        
+
+        for (int  i = 0; gameObject.transform.childCount > i; i++)
+        {
+            Transform item = levelGroup.transform.GetChild(i);
+            currentLevel.AddItem(item);
         }
 
-        currentItemPrefab.GetComponent<PrefabeLevelItemController>().DestroyItem();
-        currentItemPrefab = null;
+       LevelManager.instanse.SaveLevels();
+    }
+
+    public void LoadLevel()
+    {
+        ClearLevel();
+        Level currentLevel = LevelManager.instanse.levelsList.levels[0];
+
+        foreach (ItemTransform item in currentLevel.items)
+        {
+            GameObject prefab = levelPrefabs.prefabs[item.id];
+            GameObject physicItem = Instantiate(prefab, levelGroup.transform);
+
+            physicItem.transform.position = item.position;
+            physicItem.transform.eulerAngles = item.rotation;
+            physicItem.AddComponent<PrefabeLevelItemController>();
+            physicItem.GetComponent<PrefabeLevelItemController>().enabled = false;
+        }
+    }
+
+    public void ClearLevel()
+    {
+        foreach (Transform item in levelGroup.GetComponentInChildren<Transform>()) {
+            Destroy(item.gameObject);
+        }
     }
 }
