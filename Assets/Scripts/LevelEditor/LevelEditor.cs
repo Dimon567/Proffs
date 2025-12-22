@@ -71,10 +71,9 @@ public class LevelEditor : MonoBehaviour
     public void SaveLevel()
     {
         currentLevel = new Level();
-        if ()
-        {
-            LevelManager.instanse.levelsList.levels.Add(currentLevel);
-        }
+
+        LevelManager.instanse.levelsList.levels.Add(currentLevel);
+        
         
 
         for (int  i = 0; gameObject.transform.childCount > i; i++)
