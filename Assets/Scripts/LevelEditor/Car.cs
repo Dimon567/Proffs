@@ -9,7 +9,7 @@ public class Car : MonoBehaviour
     {
         gameObject.SetActive(false);
         gameObject.GetComponent<Rigidbody2D>().centerOfMass = _centerOfMass.position;
-        gameObject.transform.position = _spawnPoint.position;
+        //gameObject.transform.position = _spawnPoint.position;
     }
 
     void Update()

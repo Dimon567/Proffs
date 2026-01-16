@@ -87,8 +87,9 @@ public class LevelEditor : MonoBehaviour
 
     public void LoadLevel()
     {
-        ClearLevel();
+        Debug.Log(JsonUtility.ToJson(LevelManager.instanse.levelsList));
         Level currentLevel = LevelManager.instanse.levelsList.levels[0];
+        
 
         foreach (ItemTransform item in currentLevel.items)
         {
