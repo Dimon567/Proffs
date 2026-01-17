@@ -1840,7 +1840,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!20 &96966808
 Camera:
   m_ObjectHideFlags: 0
@@ -5175,6 +5175,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260389269}
   m_CullTransparentMesh: 1
+--- !u!1 &266680146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 266680147}
+  m_Layer: 0
+  m_Name: Spawnpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &266680147
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266680146}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.3157833, y: -0.012242351, z: 0.004074681, w: -0.94874364}
+  m_LocalPosition: {x: 7.39, y: 9.28, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &283690540
 GameObject:
   m_ObjectHideFlags: 0
@@ -5257,7 +5288,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 283690543}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1890950693}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &283690543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12032,6 +12075,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 385679417}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &600447112 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 561986339439950711, guid: 4a2269a142c217f449702d7b78575657, type: 3}
+  m_PrefabInstance: {fileID: 1772863686}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &601728238
 GameObject:
   m_ObjectHideFlags: 0
@@ -16074,29 +16122,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 1810365649}
     m_Modifications:
     - target: {fileID: 2319663872690109999, guid: 4a2269a142c217f449702d7b78575657, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2319663872690109999, guid: 4a2269a142c217f449702d7b78575657, type: 3}
-      propertyPath: m_UseMotor
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2319663872690109999, guid: 4a2269a142c217f449702d7b78575657, type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: -0.68499756
-      objectReference: {fileID: 0}
-    - target: {fileID: 2319663872690109999, guid: 4a2269a142c217f449702d7b78575657, type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: 0.116000175
-      objectReference: {fileID: 0}
-    - target: {fileID: 2319663872690109999, guid: 4a2269a142c217f449702d7b78575657, type: 3}
       propertyPath: m_ConnectedRigidBody
       value: 
       objectReference: {fileID: 1810365652}
-    - target: {fileID: 2319663872690109999, guid: 4a2269a142c217f449702d7b78575657, type: 3}
-      propertyPath: m_Motor.m_MotorSpeed
-      value: 2000
-      objectReference: {fileID: 0}
     - target: {fileID: 2615678907916751125, guid: 4a2269a142c217f449702d7b78575657, type: 3}
       propertyPath: m_Name
       value: Simple Wheel (1)
@@ -16140,26 +16168,6 @@ PrefabInstance:
     - target: {fileID: 2615678907916751126, guid: 4a2269a142c217f449702d7b78575657, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2857147025035172129, guid: 4a2269a142c217f449702d7b78575657, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: c9cb0d89b23e3b54ba5e838739179fe0, type: 2}
-    - target: {fileID: 6520749465927927460, guid: 4a2269a142c217f449702d7b78575657, type: 3}
-      propertyPath: m_Mass
-      value: 0.28274348
-      objectReference: {fileID: 0}
-    - target: {fileID: 6520749465927927460, guid: 4a2269a142c217f449702d7b78575657, type: 3}
-      propertyPath: m_Simulated
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6520749465927927460, guid: 4a2269a142c217f449702d7b78575657, type: 3}
-      propertyPath: m_Constraints
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6520749465927927460, guid: 4a2269a142c217f449702d7b78575657, type: 3}
-      propertyPath: m_UseAutoMass
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20762,22 +20770,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1150836596}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 798926848}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1890950693}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: Menu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -22683,10 +22679,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Banana Rover
       objectReference: {fileID: 0}
-    - target: {fileID: 286638946415238250, guid: a822982d14a49bc42a0f7c4395804e99, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 286638946415238251, guid: a822982d14a49bc42a0f7c4395804e99, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -22727,24 +22719,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 509295860957179348, guid: a822982d14a49bc42a0f7c4395804e99, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6964536242556953438, guid: a822982d14a49bc42a0f7c4395804e99, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6998944957583523305, guid: a822982d14a49bc42a0f7c4395804e99, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.516
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 286638946415238251, guid: a822982d14a49bc42a0f7c4395804e99, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1596777228}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a822982d14a49bc42a0f7c4395804e99, type: 3}
 --- !u!4 &1333608114 stripped
@@ -26112,37 +26089,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1574195802}
   m_CullTransparentMesh: 1
---- !u!1 &1596777227
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1596777228}
-  m_Layer: 10
-  m_Name: Points
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1596777228
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1596777227}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1333608114}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1612959270
 GameObject:
   m_ObjectHideFlags: 0
@@ -27493,30 +27439,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1150836596}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 798926848}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &1678795870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28765,8 +28687,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b175eba25be802b4b95287fcb38002be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Car
-  _spawnPoint: {fileID: 0}
+  _spawnPoint: {fileID: 266680147}
   _centerOfMass: {fileID: 445173103}
+  _wheel1: {fileID: 1913604175}
+  _wheel2: {fileID: 600447112}
 --- !u!50 &1810365652
 Rigidbody2D:
   serializedVersion: 5
@@ -29553,7 +29477,9 @@ MonoBehaviour:
   _editorCamera: {fileID: 1462817484}
   _playCamera: {fileID: 96966808}
   _levelEditor: {fileID: 1530291777}
-  _car: {fileID: 1810365651}
+  _car: {fileID: 1810365648}
+  _mainMenuUI: {fileID: 1150836596}
+  _carEditorUI: {fileID: 798926848}
 --- !u!1001 &1900489180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29705,6 +29631,11 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3960387234934846038, guid: c38b02eb39d7ca24b817d3d9b881c45e, type: 3}
   m_PrefabInstance: {fileID: 1264188734}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1913604175 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 561986339439950711, guid: 4a2269a142c217f449702d7b78575657, type: 3}
+  m_PrefabInstance: {fileID: 792300484}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1918364919
 GameObject:
@@ -33522,3 +33453,4 @@ SceneRoots:
   - {fileID: 1890950692}
   - {fileID: 1929903629}
   - {fileID: 535911769}
+  - {fileID: 266680147}
