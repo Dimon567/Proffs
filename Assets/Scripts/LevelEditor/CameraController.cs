@@ -3,11 +3,10 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 public class CameraController : MonoBehaviour
-{ 
-
+{
     void FixedUpdate()
     {
-        //MoveCamera();
+        MoveCamera();
     }
 
     void MoveCamera()
@@ -24,7 +23,7 @@ public class CameraController : MonoBehaviour
             shift.x += Input.mousePosition.x - 100;
         }
 
-        if (Input.mousePosition.y > Screen.height - 100 )
+        if (Input.mousePosition.y > Screen.height - 100)
         {
             shift.y -= Input.mousePosition.y - Screen.height - 100;
         }
@@ -32,7 +31,7 @@ public class CameraController : MonoBehaviour
         {
             shift.y += Input.mousePosition.y - 100;
         }
-       
+
         transform.position = Vector3.Lerp(transform.position, transform.position + shift, Time.deltaTime * 0.02f);
     }
 }

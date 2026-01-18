@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CarController : MonoBehaviour
+public class Car : MonoBehaviour
 {
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private Transform _centerOfMass;
@@ -9,7 +9,7 @@ public class CarController : MonoBehaviour
 
     public void SpawnCar()
     {
-        gameObject.GetComponent<Rigidbody2D>().centerOfMass = _centerOfMass.position;
+        //gameObject.GetComponent<Rigidbody2D>().centerOfMass = _centerOfMass.position;
         gameObject.transform.position = _spawnPoint.position;
         Stop();
     }
