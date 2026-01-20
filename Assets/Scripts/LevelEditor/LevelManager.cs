@@ -43,6 +43,15 @@ public class LevelManager : MonoBehaviour
 }
 
 [Serializable]
+public class CarSettings
+{
+    public int body = 0;
+    public int booster = 0;
+    public int wheel = 0;
+    public bool wings = false;
+}
+
+[Serializable]
 public class ItemTransform
 {
     public Vector3 position;
@@ -61,6 +70,7 @@ public class ItemTransform
 public class Level
 {
     public List<ItemTransform> items = new List<ItemTransform>();
+    public CarSettings carSettings = new CarSettings();
 
     public void AddItem(Transform item)
     {

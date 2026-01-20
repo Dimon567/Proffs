@@ -14,7 +14,7 @@ public class LevelEditor : MonoBehaviour
     private LevelItems levelPrefabs;
     private GameObject currentItemPrefab;
     private bool isState = false;
-    private Level currentLevel;
+    public Level currentLevel;
 
     public event Action<int> OnSelected;
 

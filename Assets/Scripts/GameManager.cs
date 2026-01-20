@@ -9,8 +9,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Camera _playCamera;
     [SerializeField] private LevelEditor _levelEditor;
     [SerializeField] private GameObject _car;
+    [SerializeField] private GameObject _tableObjects;
     [SerializeField] private GameObject _mainMenuUI;
     [SerializeField] private GameObject _carEditorUI;
+    [SerializeField] private GameObject _levelSettingsUI;
 
     private Camera currentCamera;
     private GameObject currentUI;
@@ -29,6 +31,13 @@ public class GameManager : MonoBehaviour
     public void StartEditor()
     {
         SwitchCamera(_editorCamera);
+        _tableObjects.SetActive(false);
+    }
+
+    public void LevelSettings(bool state)
+    {
+        _levelSettingsUI.SetActive(state);
+        _editorCamera.GetComponent<CameraController>().enabled = !state;
     }
 
     public void Play()
@@ -40,7 +49,6 @@ public class GameManager : MonoBehaviour
 
         EditUI(_carEditorUI);
 
-        levelManager.LoadLevels();
         _levelEditor.LoadLevel();
 
         _car.gameObject.SetActive(true);
@@ -62,6 +70,7 @@ public class GameManager : MonoBehaviour
         SwitchCamera(Camera.main);
         EditUI(_mainMenuUI);
 
+        _tableObjects.SetActive(true);
         _car.gameObject.SetActive(false);
         _levelEditor.ClearLevel();
         
